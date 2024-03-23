@@ -21,6 +21,10 @@ public class GameBoard {
         this.drawState = false;
     }
 
+    public static void main(String[] args) {
+        
+    }
+
     /**
      *
      * @return

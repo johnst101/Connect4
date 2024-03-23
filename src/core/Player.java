@@ -29,7 +29,7 @@ public class Player {
      * @return
      */
     public int getPlayerID() {
-
+        return this.playerID;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Player {
      * @return
      */
     public int getPieceCount() {
-
+        return this.pieceCount;
     }
 
     /**
