@@ -53,6 +53,7 @@ public class GameBoard {
      *
      * @param columnSelection The inputted selection by the Player.
      * @param isPlayerXTurn The indicator for if it's Player X's turn or not.
+     * @return The boolean representation of if the move made was valid.
      */
     public boolean setBoardState(int columnSelection, boolean isPlayerXTurn) {
         if (this.boardState[0][columnSelection - 1] != '\0') {
