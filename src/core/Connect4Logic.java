@@ -12,11 +12,11 @@ import java.util.Random;
 
 
 public class Connect4Logic {
+    /**TODO:*/
     private final int gameID;
-    private final Player playerX;
-    private final Player PlayerO;
+    /**TODO:*/
     private boolean playerXTurn;
-    private int pieceCount;
+    /**TODO:*/
     private GameBoard gameBoard;
 
 
@@ -27,9 +27,6 @@ public class Connect4Logic {
         Random rand = new Random();
         int min = 100, max = 1000;
         this.gameID = rand.nextInt(max - min + 1) + min;
-        this.pieceCount = 42;
-        this.playerX = new Player();
-        this.PlayerO = new Player();
         this.gameBoard = new GameBoard();
         this.playerXTurn = true;
     }
@@ -40,26 +37,6 @@ public class Connect4Logic {
      */
     public int getGameID() {
         return this.gameID;
-    }
-    
-    public Player getPlayerX() {
-        return this.playerX;
-    }
-    
-    public Player getPlayerO() {
-        return this.PlayerO;
-    }
-
-    /**
-     * TODO:
-     * @return
-     */
-    public int getPieceCount() {
-        return this.pieceCount;
-    }
-    
-    public void subtractOnePiece() {
-        this.pieceCount--;
     }
 
     /**
@@ -84,19 +61,5 @@ public class Connect4Logic {
      */
     public void setPlayerXTurn(boolean turnSwitch) {
         this.playerXTurn = turnSwitch;
-    }
-
-    /**
-     * TODO:
-     */
-    public void startNewGame() {
-
-    }
-
-    /**
-     * TODO:
-     */
-    public void endGame() {
-
     }
 }

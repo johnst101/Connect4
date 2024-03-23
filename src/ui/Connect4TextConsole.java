@@ -8,6 +8,7 @@ package ui;
  * @version 1.0 Mar 23, 2024
  */
 
+// packages
 import core.Connect4Logic;
 import java.util.Scanner;
 
@@ -36,7 +37,7 @@ public class Connect4TextConsole {
         newGameConsole.displayCurrentBoard();
 
         // Loop while WinState or DrawState are not reached
-        while (!newGameConsole.getNewGameLogic().getGameBoard().getWinState() || !newGameConsole.getNewGameLogic().getGameBoard().getDrawState()) {
+        while (!newGameConsole.getNewGameLogic().getGameBoard().getWinState() && !newGameConsole.getNewGameLogic().getGameBoard().getDrawState()) {
             // If player X turn
             if (newGameConsole.getNewGameLogic().getPlayerXTurn()) {
                 // Print prompt for player x
@@ -57,23 +58,34 @@ public class Connect4TextConsole {
                 // Print "Invalid column selection."
                 System.out.println("Invalid column selection.");
                 // Continue
-                continue;
             }
             // Else
             else {
                 // Update boardState
-                // Update player piece state
                 if (newGameConsole.getNewGameLogic().getPlayerXTurn()) {
-                    newGameConsole.getNewGameLogic().getPlayerX().subtractOnePiece();
+                    if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
+                        // Update total piece state
+                        newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                        // Print updated boardState
+                        newGameConsole.displayCurrentBoard();
+                        // Update player turn
+                        newGameConsole.getNewGameLogic().setPlayerXTurn(!newGameConsole.getNewGameLogic().getPlayerXTurn());
+                    } else {
+                        System.out.println("Column full. No move made.");
+                    }
                 } else {
-                    newGameConsole.getNewGameLogic().getPlayerO().subtractOnePiece(); 
+                    if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
+                        // Update total piece state
+                        newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                        // Print updated boardState
+                        newGameConsole.displayCurrentBoard();
+                        // Update player turn
+                        newGameConsole.getNewGameLogic().setPlayerXTurn(!newGameConsole.getNewGameLogic().getPlayerXTurn());
+                    } else {
+                        System.out.println("Column full. No move made.");
+                    }
                 }
-                // Update total piece state
-                newGameConsole.getNewGameLogic().subtractOnePiece();
-                // Print updated boardState
-                newGameConsole.displayCurrentBoard();
-                // Update player turn
-                newGameConsole.getNewGameLogic().setPlayerXTurn(!newGameConsole.getNewGameLogic().getPlayerXTurn());
+
             }
         }
         // If WinState reached
