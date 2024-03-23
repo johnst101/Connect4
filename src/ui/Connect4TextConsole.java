@@ -1,28 +1,30 @@
 package ui;
 
 /**
- * TODO: Description
+ * Connect4TextConsole contains the main method of the Connect4 game.
+ * It drives the game on the console and interacts with the players.
  *
  * @author Tyler Johnson (tjohson)
- * @version 1.0 Mar 21, 2024
+ * @version 1.0 Mar 23, 2024
  */
 
 import core.Connect4Logic;
 import java.util.Scanner;
 
 public class Connect4TextConsole {
+    /**For each game that's started, a new Connect4Logic object is created called newGameLogic.*/
     private Connect4Logic newGameLogic;
 
-    /**
-     * TODO:
-     */
+    /**Sole constructor. Only creates new Connect4Logic object.*/
     public Connect4TextConsole() {
         this.newGameLogic = new Connect4Logic();
     }
 
     /**
-     * TODO:
-     * @param args
+     * This method runs the console interaction for the Connect4 game.
+     * It also calls to the Connect4Logic class to run the logic of the game.
+     *
+     * @param args Command line arguments - not used
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -95,45 +97,22 @@ public class Connect4TextConsole {
     }
 
     /**
-     * TODO:
-     * @return
+     * Acts as an access point to retrieve the game logic for the current game.
+     * This helps maintain the abstract integrity of the game structure.
+     *
+     * @return Connect4Logic object that contains runs the movement and player logic.
      */
     public Connect4Logic getNewGameLogic() {
         return this.newGameLogic;
     }
 
     /**
-     * TODO:
+     * Prints out the visual representation of the current state
+     * of the Connect4 game board when called. It does this by
+     * accessing the current game logic then getting the game board
+     * to print it's state.
      */
     public void displayCurrentBoard() {
-        this.newGameLogic.getGameBoard();
-    }
-
-    /**
-     * TODO:
-     */
-    public void displayPlayerXMove() {
-
-    }
-
-    /**
-     * TODO:
-     */
-    public void displayPlayerOMove() {
-
-    }
-
-    /**
-     * TODO:
-     */
-    public void displayWinState() {
-
-    }
-
-    /**
-     * TODO:
-     */
-    public void displayDrawState() {
-
+        this.newGameLogic.getGameBoard().printCurrentBoard();
     }
 }
