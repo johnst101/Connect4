@@ -1,27 +1,31 @@
 package core;
 
 /**
- * TODO: Description
+ * Controls the moves on the Game Board and holds
+ * the actual state of the board.
  *
  * @author Tyler Johnson (tjohson)
- * @version 1.0 Mar 21, 2024
+ * @version 1.0 Mar 23, 2024
  */
 
 // packages
 import java.util.Arrays;
 
 public class GameBoard {
-    /**TODO:*/
+    /**Holds the data structure state of the Game Board.*/
     private char[][] boardState;
-    /**TODO:*/
+    /**The trigger for a winning move.*/
     private boolean winState;
-    /**TODO:*/
+    /**The trigger for a draw move*/
     private boolean drawState;
-    /**TODO:*/
+    /**The number of pieces left to be used*/
     private int pieceCount;
 
     /**
-     * TODO:
+     * Sole constructor. Invokes a new Game Board. Creates a 2D array
+     * of characters as the board, sets the win state and the draw state
+     * to false, and starts the game with 42 total pieces as there are
+     * 42 spaces to be filled.
      */
     public GameBoard() {
         this.boardState = new char[6][7];
@@ -31,17 +35,24 @@ public class GameBoard {
     }
 
     /**
-     * TODO:
-     * @return
+     * Returns the 2D array of characters that is the game board.
+     * Currently not in use.
+     *
+     * @return The character 2D array representation of the Game Board.
      */
     public char[][] getBoardState() {
         return this.boardState;
     }
 
     /**
+     * Adds new pieces to the board based on the selection of the Player.
+     * Checks if the column selection is already full and will return false
+     * to tell the Connect4TextConsole to output an error message and request
+     * a new input. If the input is valid, the piece is added and a
+     * check is made if the move created a valid win state or draw state.
      *
-     * @param columnSelection
-     * @param isPlayerXTurn
+     * @param columnSelection The inputted selection by the Player.
+     * @param isPlayerXTurn The indicator for if it's Player X's turn or not.
      */
     public boolean setBoardState(int columnSelection, boolean isPlayerXTurn) {
         if (this.boardState[0][columnSelection - 1] != '\0') {
@@ -69,9 +80,7 @@ public class GameBoard {
         return false;
     }
 
-    /**
-     * TODO:
-     */
+    /**Prints the visual representation of the Game Board into the console.*/
     public void printCurrentBoard() {
         for (int i = 0; i < this.boardState.length; i++) {
             System.out.print("|");
@@ -85,15 +94,21 @@ public class GameBoard {
     }
 
     /**
-     * TODO:
-     * @return
+     * Returns the boolean representation of in the Game Board
+     * is in a valid win state.
+     *
+     * @return The boolean representation of a valid win state.
      */
     public boolean getWinState() {
         return this.winState;
     }
 
     /**
-     * TODO:
+     * The method checks for a win state horizontally, vertically,
+     * and diagonally. If one of the four checks is true, then the
+     * win state will change to true.
+     *
+     * @param playerTurn The character 'X' or 'O' to represent who's turn it is.
      */
     public void setWinState(char playerTurn) {
         if (checkHorizontal(playerTurn) || checkVertical(playerTurn) || checkDiagonalBotTop(playerTurn) || checkDiagonalTopBot(playerTurn)) {
@@ -102,15 +117,18 @@ public class GameBoard {
     }
 
     /**
-     * TODO:
-     * @return
+     * Returns the boolean representation of if a valid
+     * draw state has been met.
+     *
+     * @return The boolean representation of a valid draw state.
      */
     public boolean getDrawState() {
         return this.drawState;
     }
 
     /**
-     * TODO:
+     * Changes the draw state to true if there are no
+     * pieces left to be placed.
      */
     public void setDrawState() {
         if (this.pieceCount == 0) {
@@ -119,12 +137,20 @@ public class GameBoard {
     }
 
     /**
-     * TODO:
+     * Decrements the piece count down by 1 when called.
      */
     public void subtractOnePiece() {
         this.pieceCount--;
     }
 
+    /**
+     * Checks over the Game Board horizontally to determine if
+     * the given player has four pieces in a row. Returns true
+     * if four pieces in a row are found. Otherwise, returns false.
+     *
+     * @param playerTurn The char representation of the player whose turn it is.
+     * @return The boolean representation of if a win state was found.
+     */
     public boolean checkHorizontal(char playerTurn) {
         for (int row = 0; row < this.boardState.length; row++) {
             for (int col = 0; col < this.boardState[row].length - 3; col++) {
@@ -136,6 +162,14 @@ public class GameBoard {
         return false;
     }
 
+    /**
+     * Checks over the Game Board vertically to determine if
+     * the given player has four concurrent pieces in a column. Returns true
+     * if four concurrent pieces are found. Otherwise, returns false.
+     *
+     * @param playerTurn The char representation of the player whose turn it is.
+     * @return The boolean representation of if a win state was found.
+     */
     public boolean checkVertical(char playerTurn) {
         for (int col = 0; col < this.boardState[0].length; col++) {
             for (int row = 0; row < this.boardState.length - 3; row++) {
@@ -147,6 +181,14 @@ public class GameBoard {
         return false;
     }
 
+    /**
+     * Checks over the Game Board diagonally from bottom to top to determine if
+     * the given player has four concurrent pieces. Returns true
+     * if four concurrent pieces are found. Otherwise, returns false.
+     *
+     * @param playerTurn The char representation of the player whose turn it is.
+     * @return The boolean representation of if a win state was found.
+     */
     public boolean checkDiagonalBotTop(char playerTurn) {
         for (int row = 3; row < this.boardState.length; row++) {
             for (int col = 0; col <= this.boardState[col].length - 4; col++) {
@@ -161,6 +203,14 @@ public class GameBoard {
         return false;
     }
 
+    /**
+     * Checks over the Game Board diagonally from top to bottom to determine if
+     * the given player has four concurrent pieces. Returns true
+     * if four concurrent pieces are found. Otherwise, returns false.
+     *
+     * @param playerTurn The char representation of the player whose turn it is.
+     * @return The boolean representation of if a win state was found.
+     */
     public boolean checkDiagonalTopBot(char playerTurn) {
         for (int row = 0; row <= this.boardState.length - 4; row++) {
             for (int col = 0; col <= this.boardState[col].length - 4; col++) {

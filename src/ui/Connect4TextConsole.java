@@ -10,6 +10,8 @@ package ui;
 
 // packages
 import core.Connect4Logic;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Connect4TextConsole {
@@ -43,14 +45,28 @@ public class Connect4TextConsole {
                 // Print prompt for player x
                 System.out.println("PlayerX-your turn. Choose a column number from 1-7.");
                 // Get input from player x
-                columnSelection = in.nextInt();
+                try {
+                    columnSelection = in.nextInt();
+                } catch (InputMismatchException ex) {
+                    columnSelection = 0;
+                    System.out.println("The input must be an integer. Please try again");
+                    in.nextLine();
+                    continue;
+                }
             }
             // Else
             else {
                 // Print prompt for player y
                 System.out.println("PlayerO-your turn. Choose a column number from 1-7.");
                 // Get input from player y
-                columnSelection = in.nextInt();
+                try {
+                    columnSelection = in.nextInt();
+                } catch (InputMismatchException ex) {
+                    columnSelection = 0;
+                    System.out.println("The input must be an integer. Please try again");
+                    in.nextLine();
+                    continue;
+                }
             }
 
             // If input NOT between 1 and 7
