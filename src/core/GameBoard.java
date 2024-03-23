@@ -1,4 +1,4 @@
-package ui;
+package core;
 
 /**
  * TODO: Description
@@ -21,15 +21,15 @@ public class GameBoard {
         this.drawState = false;
     }
 
-    public static void main(String[] args) {
-        
-    }
-
     /**
      *
      * @return
      */
     public char[][] getBoardState() {
+
+    }
+
+    public void printCurrentBoard() {
 
     }
 

@@ -40,6 +40,10 @@ public class Player {
         return this.pieceCount;
     }
 
+    public void subtractOnePiece () {
+        this.pieceCount--;
+    }
+
     /**
      * TODO:
      */
