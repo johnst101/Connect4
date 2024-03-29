@@ -44,7 +44,7 @@ public class Connect4TextConsole {
         System.out.println("Begin Game.");
 
         // Getting input for game type
-        while (!gameType.equalsIgnoreCase("C") || !gameType.equalsIgnoreCase("P")) {
+        while (!gameType.equalsIgnoreCase("C") && !gameType.equalsIgnoreCase("P")) {
             System.out.println("Enter 'P' if you want to play against another player; enter 'C' to play against the computer.");
             try {
                 gameType = in.next();
