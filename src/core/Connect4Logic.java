@@ -33,6 +33,18 @@ public class Connect4Logic {
     }
 
     /**
+     *
+     * @param compGame
+     */
+    public Connect4Logic(String compGame) {
+        Random rand = new Random();
+        int min = 100, max = 1000;
+        this.gameID = rand.nextInt(max - min + 1) + min;
+        this.gameBoard = new GameBoard(compGame);
+        this.playerXTurn = true;
+    }
+
+    /**
      * Returns the game ID.
      *
      * @return The integer ID for the current game.

@@ -5,11 +5,8 @@ package core;
  * the actual state of the board.
  *
  * @author Tyler Johnson (tjohson)
- * @version 1.0 Mar 23, 2024
+ * @version 2.0 Mar 28, 2024
  */
-
-// packages
-import java.util.Arrays;
 
 public class GameBoard {
     /**Holds the data structure state of the Game Board.*/
@@ -20,6 +17,8 @@ public class GameBoard {
     private boolean drawState;
     /**The number of pieces left to be used*/
     private int pieceCount;
+    /**TODO:*/
+    private Connect4ComputerPlayer compPlayer;
 
     /**
      * Sole constructor. Invokes a new Game Board. Creates a 2D array
@@ -32,6 +31,18 @@ public class GameBoard {
         this.winState = false;
         this.drawState = false;
         this.pieceCount = 42;
+    }
+
+    /**
+     * TODO:
+     * @param compGame
+     */
+    public GameBoard(String compGame) {
+        this.boardState = new char[6][7];
+        this.winState = false;
+        this.drawState = false;
+        this.pieceCount = 42;
+        this.compPlayer = new Connect4ComputerPlayer(this.boardState);
     }
 
     /**
@@ -92,6 +103,10 @@ public class GameBoard {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public Connect4ComputerPlayer getCompPlayer() {
+        return this.compPlayer;
     }
 
     /**
