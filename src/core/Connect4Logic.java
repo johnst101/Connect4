@@ -4,12 +4,11 @@ package core;
  * Connect4Logic runs the moves of each player and the game board state.
  *
  * @author Tyler Johnson (tjohson)
- * @version 1.0 Mar 23, 2024
+ * @version 2.0 Mar 28, 2024
  */
 
 // packages
 import java.util.Random;
-
 
 public class Connect4Logic {
     /**Is a random unique ID to each game*/
@@ -21,7 +20,7 @@ public class Connect4Logic {
 
 
     /**
-     * Sole constructor. Creates random ID for the game between 100 and 100,
+     * Player vs. player constructor. Creates random ID for the game between 100 and 1000,
      * creates a new Game Board object, and sets playerXTurn to true.
      */
     public Connect4Logic() {
@@ -33,8 +32,11 @@ public class Connect4Logic {
     }
 
     /**
+     * Player vs. computer constructor. Creates random ID for the game between 100 and 1000,
+     * creates a new Game Board object with the computer game indicator as the parameter,
+     * and sets playerXTurn to true.
      *
-     * @param compGame
+     * @param compGame Indicator to determine if the game type is a player vs. computer game
      */
     public Connect4Logic(String compGame) {
         Random rand = new Random();

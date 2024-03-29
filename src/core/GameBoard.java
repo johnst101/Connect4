@@ -17,11 +17,11 @@ public class GameBoard {
     private boolean drawState;
     /**The number of pieces left to be used*/
     private int pieceCount;
-    /**TODO:*/
+    /**For each player vs. computer game a Computer Player will be create*/
     private Connect4ComputerPlayer compPlayer;
 
     /**
-     * Sole constructor. Invokes a new Game Board. Creates a 2D array
+     * Player vs. player constructor. Invokes a new Game Board. Creates a 2D array
      * of characters as the board, sets the win state and the draw state
      * to false, and starts the game with 42 total pieces as there are
      * 42 spaces to be filled.
@@ -34,8 +34,12 @@ public class GameBoard {
     }
 
     /**
-     * TODO:
-     * @param compGame
+     * Player vs. computer constructor. Invokes a new Game Board. Creates a 2D array
+     * of characters as the board, sets the win state and the draw state
+     * to false, starts the game with 42 total pieces, and invokes a new
+     * Computer Player object passing the board state to the object.
+     *
+     * @param compGame Indicator to determine if the game type is a player vs. computer game
      */
     public GameBoard(String compGame) {
         this.boardState = new char[6][7];
@@ -105,6 +109,11 @@ public class GameBoard {
         System.out.println();
     }
 
+    /**
+     * Returns the computer player object.
+     *
+     * @return The computer player object for a player vs. computer game.
+     */
     public Connect4ComputerPlayer getCompPlayer() {
         return this.compPlayer;
     }
