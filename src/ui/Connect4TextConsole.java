@@ -5,7 +5,7 @@ package ui;
  * It drives the game on the console and interacts with the players.
  *
  * @author Tyler Johnson (tjohson)
- * @version 1.0 Mar 23, 2024
+ * @version 2.0 Mar 23, 2024
  */
 
 // packages
@@ -17,15 +17,20 @@ public class Connect4TextConsole {
     /**For each game that's started, a new Connect4Logic object is created called newGameLogic.*/
     private Connect4Logic newGameLogic;
 
-    /**Sole constructor. Only creates new Connect4Logic object.*/
+    /**
+     * Constructor for player vs. player game type.
+     * Only creates new Connect4Logic object.
+     */
     public Connect4TextConsole() {
         this.newGameLogic = new Connect4Logic();
     }
 
     /**
-     * TODO:
+     * Constructor for player vs. computer game type.
+     * Creates a new Connect4Logic object passing the computer
+     * game type to the constructor.
      *
-     * @param compGame
+     * @param compGame Indicator to determine if the game type is a player vs. computer game
      */
     public Connect4TextConsole(String compGame) { this.newGameLogic = new Connect4Logic(compGame); }
 
