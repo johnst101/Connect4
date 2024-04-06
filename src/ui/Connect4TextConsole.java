@@ -5,12 +5,11 @@ package ui;
  * It drives the game on the console and interacts with the players.
  *
  * @author Tyler Johnson (tjohson)
- * @version 1.0 Mar 23, 2024
+ * @version 2.0 Mar 28, 2024
  */
 
 // packages
 import core.Connect4Logic;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -18,10 +17,22 @@ public class Connect4TextConsole {
     /**For each game that's started, a new Connect4Logic object is created called newGameLogic.*/
     private Connect4Logic newGameLogic;
 
-    /**Sole constructor. Only creates new Connect4Logic object.*/
+    /**
+     * Constructor for player vs. player game type.
+     * Only creates new Connect4Logic object.
+     */
     public Connect4TextConsole() {
         this.newGameLogic = new Connect4Logic();
     }
+
+    /**
+     * Constructor for player vs. computer game type.
+     * Creates a new Connect4Logic object passing the computer
+     * game type to the constructor.
+     *
+     * @param compGame Indicator to determine if the game type is a player vs. computer game
+     */
+    public Connect4TextConsole(String compGame) { this.newGameLogic = new Connect4Logic(compGame); }
 
     /**
      * This method runs the console interaction for the Connect4 game.
@@ -31,87 +42,158 @@ public class Connect4TextConsole {
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Connect4TextConsole newGameConsole = new Connect4TextConsole();
+        Connect4TextConsole newGameConsole;
         int columnSelection = 0;
+        String gameType = "";
         // Print "Begin Game."
         System.out.println("Begin Game.");
-        // Print blank game board
+
+        // Getting input for game type
+        while (!gameType.equalsIgnoreCase("C") && !gameType.equalsIgnoreCase("P")) {
+            System.out.println("Enter 'P' if you want to play against another player; enter 'C' to play against the computer.");
+            try {
+                gameType = in.next();
+            } catch (InputMismatchException ex) {
+                gameType = "Z";
+                System.out.println("The input must be an integer. Please try again");
+                in.nextLine();
+            }
+        }
+
+        // Create game logic
+        if (gameType.equalsIgnoreCase("C")) {
+            newGameConsole = new Connect4TextConsole("P");
+        } else {
+            newGameConsole = new Connect4TextConsole();
+        }
+
+        // Print blank board
         newGameConsole.displayCurrentBoard();
 
-        // Loop while WinState or DrawState are not reached
-        while (!newGameConsole.getNewGameLogic().getGameBoard().getWinState() && !newGameConsole.getNewGameLogic().getGameBoard().getDrawState()) {
-            // If player X turn
-            if (newGameConsole.getNewGameLogic().getPlayerXTurn()) {
-                // Print prompt for player x
-                System.out.println("PlayerX-your turn. Choose a column number from 1-7.");
-                // Get input from player x
-                try {
-                    columnSelection = in.nextInt();
-                } catch (InputMismatchException ex) {
-                    columnSelection = 0;
-                    System.out.println("The input must be an integer. Please try again");
-                    in.nextLine();
-                    continue;
-                }
-            }
-            // Else
-            else {
-                // Print prompt for player y
-                System.out.println("PlayerO-your turn. Choose a column number from 1-7.");
-                // Get input from player y
-                try {
-                    columnSelection = in.nextInt();
-                } catch (InputMismatchException ex) {
-                    columnSelection = 0;
-                    System.out.println("The input must be an integer. Please try again");
-                    in.nextLine();
-                    continue;
-                }
-            }
-
-            // If input NOT between 1 and 7
-            if (columnSelection < 1 || columnSelection > 7) {
-                // Print "Invalid column selection."
-                System.out.println("Invalid column selection.");
-                // Continue
-            }
-            // Else
-            else {
-                // Update boardState
+        // Game against computer
+        if (gameType.equalsIgnoreCase("C")) {
+            System.out.println("Start game against computer.");
+            while (!newGameConsole.getNewGameLogic().getGameBoard().getWinState() && !newGameConsole.getNewGameLogic().getGameBoard().getDrawState()) {
                 if (newGameConsole.getNewGameLogic().getPlayerXTurn()) {
-                    if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
-                        // Update total piece state
-                        newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
-                        // Print updated boardState
-                        newGameConsole.displayCurrentBoard();
-                        // Update player turn
-                        newGameConsole.getNewGameLogic().setPlayerXTurn(!newGameConsole.getNewGameLogic().getPlayerXTurn());
-                    } else {
-                        System.out.println("Column full. No move made.");
+                    System.out.println("Your turn. Choose a column number from 1-7.");
+                    try {
+                        columnSelection = in.nextInt();
+                    } catch (InputMismatchException ex) {
+                        columnSelection = 0;
+                        System.out.println("The input must be an integer. Please try again");
+                        in.nextLine();
+                        continue;
                     }
                 } else {
-                    if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
+                    System.out.println("Computer's turn. Making move now.");
+                }
+                if (columnSelection < 1 || columnSelection > 7) {
+                    // Print "Invalid column selection."
+                    System.out.println("Invalid column selection.");
+                    // Continue
+                } else {
+                    // Update boardState
+                    if (newGameConsole.getNewGameLogic().getPlayerXTurn()) {
+                        if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
+                            // Update total piece state
+                            newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                            // Print updated boardState
+                            newGameConsole.displayCurrentBoard();
+                            // Update player turn
+                            newGameConsole.getNewGameLogic().setPlayerXTurn(!newGameConsole.getNewGameLogic().getPlayerXTurn());
+                        } else {
+                            System.out.println("Column full. No move made.");
+                        }
+                    } else {
+                        newGameConsole.getNewGameLogic().getGameBoard().getCompPlayer().setCompBoardState();
+                        newGameConsole.getNewGameLogic().getGameBoard().setWinState('O');
+                        newGameConsole.getNewGameLogic().getGameBoard().setDrawState();
                         // Update total piece state
                         newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
                         // Print updated boardState
                         newGameConsole.displayCurrentBoard();
                         // Update player turn
                         newGameConsole.getNewGameLogic().setPlayerXTurn(!newGameConsole.getNewGameLogic().getPlayerXTurn());
-                    } else {
-                        System.out.println("Column full. No move made.");
                     }
                 }
-
+            }
+        } else { // Game against player
+            System.out.println("Start game against player.");
+            // Loop while WinState or DrawState are not reached
+            while (!newGameConsole.getNewGameLogic().getGameBoard().getWinState() && !newGameConsole.getNewGameLogic().getGameBoard().getDrawState()) {
+                // If player X turn
+                if (newGameConsole.getNewGameLogic().getPlayerXTurn()) {
+                    // Print prompt for player x
+                    System.out.println("PlayerX-your turn. Choose a column number from 1-7.");
+                    // Get input from player x
+                    try {
+                        columnSelection = in.nextInt();
+                    } catch (InputMismatchException ex) {
+                        columnSelection = 0;
+                        System.out.println("The input must be an integer. Please try again");
+                        in.nextLine();
+                        continue;
+                    }
+                } else {
+                    // Print prompt for player y
+                    System.out.println("PlayerO-your turn. Choose a column number from 1-7.");
+                    // Get input from player y
+                    try {
+                        columnSelection = in.nextInt();
+                    } catch (InputMismatchException ex) {
+                        columnSelection = 0;
+                        System.out.println("The input must be an integer. Please try again");
+                        in.nextLine();
+                        continue;
+                    }
+                }
+                // If input NOT between 1 and 7
+                if (columnSelection < 1 || columnSelection > 7) {
+                    // Print "Invalid column selection."
+                    System.out.println("Invalid column selection.");
+                    // Continue
+                } else {
+                    // Update boardState
+                    if (newGameConsole.getNewGameLogic().getPlayerXTurn()) {
+                        if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
+                            // Update total piece state
+                            newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                            // Print updated boardState
+                            newGameConsole.displayCurrentBoard();
+                            // Update player turn
+                            newGameConsole.getNewGameLogic().setPlayerXTurn(!newGameConsole.getNewGameLogic().getPlayerXTurn());
+                        } else {
+                            System.out.println("Column full. No move made.");
+                        }
+                    } else {
+                        if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
+                            // Update total piece state
+                            newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                            // Print updated boardState
+                            newGameConsole.displayCurrentBoard();
+                            // Update player turn
+                            newGameConsole.getNewGameLogic().setPlayerXTurn(!newGameConsole.getNewGameLogic().getPlayerXTurn());
+                        } else {
+                            System.out.println("Column full. No move made.");
+                        }
+                    }
+                }
             }
         }
         // If WinState reached
         if (newGameConsole.getNewGameLogic().getGameBoard().getWinState()) {
-            // Print "Player <player's letter who made the move> Won the Game."
-            // The iff statement uses !current player's turn because at the end of the loop the turn will have updated to the next player
-            if (!newGameConsole.getNewGameLogic().getPlayerXTurn()) {
-                System.out.println("Player X Won the Game!");
+            if (gameType.equalsIgnoreCase("C")) {
+                if (!newGameConsole.getNewGameLogic().getPlayerXTurn()) {
+                    System.out.println("You Won the Game!");
+                } else {
+                    System.out.println("The Computer Won the Game!");
+                }
             } else {
-                System.out.println("Player O Won the Game!");
+                if (!newGameConsole.getNewGameLogic().getPlayerXTurn()) {
+                    System.out.println("Player X Won the Game!");
+                } else {
+                    System.out.println("Player O Won the Game!");
+                }
             }
             // End the game
         }

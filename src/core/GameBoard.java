@@ -5,11 +5,8 @@ package core;
  * the actual state of the board.
  *
  * @author Tyler Johnson (tjohson)
- * @version 1.0 Mar 23, 2024
+ * @version 2.0 Mar 28, 2024
  */
-
-// packages
-import java.util.Arrays;
 
 public class GameBoard {
     /**Holds the data structure state of the Game Board.*/
@@ -20,9 +17,11 @@ public class GameBoard {
     private boolean drawState;
     /**The number of pieces left to be used*/
     private int pieceCount;
+    /**For each player vs. computer game a Computer Player will be create*/
+    private Connect4ComputerPlayer compPlayer;
 
     /**
-     * Sole constructor. Invokes a new Game Board. Creates a 2D array
+     * Player vs. player constructor. Invokes a new Game Board. Creates a 2D array
      * of characters as the board, sets the win state and the draw state
      * to false, and starts the game with 42 total pieces as there are
      * 42 spaces to be filled.
@@ -32,6 +31,22 @@ public class GameBoard {
         this.winState = false;
         this.drawState = false;
         this.pieceCount = 42;
+    }
+
+    /**
+     * Player vs. computer constructor. Invokes a new Game Board. Creates a 2D array
+     * of characters as the board, sets the win state and the draw state
+     * to false, starts the game with 42 total pieces, and invokes a new
+     * Computer Player object passing the board state to the object.
+     *
+     * @param compGame Indicator to determine if the game type is a player vs. computer game
+     */
+    public GameBoard(String compGame) {
+        this.boardState = new char[6][7];
+        this.winState = false;
+        this.drawState = false;
+        this.pieceCount = 42;
+        this.compPlayer = new Connect4ComputerPlayer(this.boardState);
     }
 
     /**
@@ -92,6 +107,15 @@ public class GameBoard {
             System.out.println();
         }
         System.out.println();
+    }
+
+    /**
+     * Returns the computer player object.
+     *
+     * @return The computer player object for a player vs. computer game.
+     */
+    public Connect4ComputerPlayer getCompPlayer() {
+        return this.compPlayer;
     }
 
     /**
