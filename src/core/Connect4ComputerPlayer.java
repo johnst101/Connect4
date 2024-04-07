@@ -32,7 +32,7 @@ public class Connect4ComputerPlayer {
         boolean breakOutter = false;
         for (int i = this.boardState.length - 1; i >= 0; i--) {
             for (int j = 0; j < this.boardState[i].length; j++) {
-                if (this.boardState[i][j] == '\0') {
+                if (this.boardState[i][j] == ' ') {
                     this.boardState[i][j] = 'O';
                     breakOutter = true;
                     break;

@@ -31,6 +31,11 @@ public class GameBoard {
         this.winState = false;
         this.drawState = false;
         this.pieceCount = 42;
+        for (int i = 0; i < this.boardState.length; i++) {
+            for (int j = 0; j < this.boardState[i].length; j++) {
+                this.boardState[i][j] = ' ';
+            }
+        }
     }
 
     /**
@@ -47,6 +52,11 @@ public class GameBoard {
         this.drawState = false;
         this.pieceCount = 42;
         this.compPlayer = new Connect4ComputerPlayer(this.boardState);
+        for (int i = 0; i < this.boardState.length; i++) {
+            for (int j = 0; j < this.boardState[i].length; j++) {
+                this.boardState[i][j] = ' ';
+            }
+        }
     }
 
     /**
@@ -71,12 +81,12 @@ public class GameBoard {
      * @return The boolean representation of if the move made was valid.
      */
     public boolean setBoardState(int columnSelection, boolean isPlayerXTurn) {
-        if (this.boardState[0][columnSelection - 1] != '\0') {
+        if (this.boardState[0][columnSelection - 1] != ' ') {
             return false;
         }
         if (isPlayerXTurn) {
             for (int i = this.boardState.length - 1; i >= 0; i--) {
-                if (this.boardState[i][columnSelection - 1] == '\0') {
+                if (this.boardState[i][columnSelection - 1] == ' ') {
                     this.boardState[i][columnSelection - 1] = 'X';
                     setWinState('X');
                     setDrawState();
@@ -85,7 +95,7 @@ public class GameBoard {
             }
         } else {
             for (int i = this.boardState.length - 1; i >= 0; i--) {
-                if (this.boardState[i][columnSelection - 1] == '\0') {
+                if (this.boardState[i][columnSelection - 1] == ' ') {
                     this.boardState[i][columnSelection - 1] = 'O';
                     setWinState('O');
                     setDrawState();
