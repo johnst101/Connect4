@@ -1,0 +1,16 @@
+.button {
+    -fx-display: inline-block;
+    -fx-outline: none; 
+    -fx-cursor: hand;
+    -fx-background-color: #0070d2;
+    -fx-border-radius: 4px;
+    -fx-border-width: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: #0070d2;
+    -fx-text-align: center;
+}
+
+.button:hover {
+    -fx-background-color: #005fb2;
+    -fx-border-color: #005fb2;
+}
