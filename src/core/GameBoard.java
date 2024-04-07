@@ -5,7 +5,7 @@ package core;
  * the actual state of the board.
  *
  * @author Tyler Johnson (tjohson)
- * @version 2.0 Mar 28, 2024
+ * @version 3.0 Apr 7, 2024
  */
 
 public class GameBoard {
@@ -89,7 +89,6 @@ public class GameBoard {
                 if (this.boardState[i][columnSelection - 1] == ' ') {
                     this.boardState[i][columnSelection - 1] = 'X';
                     setWinState('X');
-                    setDrawState();
                     return true;
                 }
             }
@@ -98,7 +97,6 @@ public class GameBoard {
                 if (this.boardState[i][columnSelection - 1] == ' ') {
                     this.boardState[i][columnSelection - 1] = 'O';
                     setWinState('O');
-                    setDrawState();
                     return true;
                 }
             }

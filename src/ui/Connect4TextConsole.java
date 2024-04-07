@@ -97,6 +97,7 @@ public class Connect4TextConsole {
                         if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
                             // Update total piece state
                             newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                            newGameConsole.getNewGameLogic().getGameBoard().setDrawState();
                             // Print updated boardState
                             newGameConsole.displayCurrentBoard();
                             // Update player turn
@@ -107,9 +108,8 @@ public class Connect4TextConsole {
                     } else {
                         newGameConsole.getNewGameLogic().getGameBoard().getCompPlayer().setCompBoardState();
                         newGameConsole.getNewGameLogic().getGameBoard().setWinState('O');
-                        newGameConsole.getNewGameLogic().getGameBoard().setDrawState();
-                        // Update total piece state
                         newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                        newGameConsole.getNewGameLogic().getGameBoard().setDrawState();
                         // Print updated boardState
                         newGameConsole.displayCurrentBoard();
                         // Update player turn
@@ -158,6 +158,7 @@ public class Connect4TextConsole {
                         if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
                             // Update total piece state
                             newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                            newGameConsole.getNewGameLogic().getGameBoard().setDrawState();
                             // Print updated boardState
                             newGameConsole.displayCurrentBoard();
                             // Update player turn
@@ -169,6 +170,7 @@ public class Connect4TextConsole {
                         if (newGameConsole.getNewGameLogic().getGameBoard().setBoardState(columnSelection, newGameConsole.getNewGameLogic().getPlayerXTurn())) {
                             // Update total piece state
                             newGameConsole.getNewGameLogic().getGameBoard().subtractOnePiece();
+                            newGameConsole.getNewGameLogic().getGameBoard().setDrawState();
                             // Print updated boardState
                             newGameConsole.displayCurrentBoard();
                             // Update player turn
