@@ -1,14 +1,14 @@
 package ui;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -16,6 +16,8 @@ import javafx.stage.Stage;
 
 public class Connect4GUI extends Application {
     /**
+     * TODO:
+     *
      * @param primaryStage the primary stage for this application, onto which
      * the application scene can be set. The primary stage will be embedded in
      * the browser if the application was launched as an applet.
@@ -24,23 +26,41 @@ public class Connect4GUI extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-        // title text
-        Text scene1Title = new Text();
-        scene1Title.setText("CONNECT 4");
-        scene1Title.setFont(Font.font("Avant Garde Gothic Bold", FontWeight.BOLD, 50));
-        VBox titleContainer = new VBox(scene1Title);
-        titleContainer.setAlignment(Pos.CENTER);
+        // title text scene 0
+        Label sceneTitle0 = new Label("CONNECT 4");
+        sceneTitle0.setFont(Font.font("Avant Garde Gothic Bold", FontWeight.BOLD, 50));
+        sceneTitle0.setTextFill(Color.BLACK);
+        VBox titleContainer0 = new VBox(sceneTitle0);
+        titleContainer0.setAlignment(Pos.CENTER);
+
+        // choose UI buttons
+        Button btnGUI = new Button("Play on GUI");
+        btnGUI.setTextFill(Color.WHITE);
+        Button btnConsole = new Button("Play on Console");
+        btnConsole.setTextFill(Color.WHITE);
+        Button btnExit0 = new Button("Exit");
+        btnExit0.setTextFill(Color.WHITE);
+        HBox hBoxButtons0 = new HBox(btnGUI, btnConsole, btnExit0);
+        hBoxButtons0.setSpacing(20);
+        hBoxButtons0.setAlignment(Pos.CENTER);
+
+        // title text scene 1
+        Label sceneTitle1 = new Label("CONNECT 4");
+        sceneTitle1.setFont(Font.font("Avant Garde Gothic Bold", FontWeight.BOLD, 50));
+        sceneTitle1.setTextFill(Color.BLACK);
+        VBox titleContainer1 = new VBox(sceneTitle1);
+        titleContainer1.setAlignment(Pos.CENTER);
 
         // first game selection buttons
         Button btnPlayComputer = new Button("Play Computer");
         btnPlayComputer.setTextFill(Color.WHITE);
         Button btnPlayPlayer = new Button("Play Another Player");
         btnPlayPlayer.setTextFill(Color.WHITE);
-        Button btnExit = new Button("Exit");
-        btnExit.setTextFill(Color.WHITE);
-        HBox hBoxButtons = new HBox(btnPlayComputer, btnPlayPlayer, btnExit);
-        hBoxButtons.setSpacing(20);
-        hBoxButtons.setAlignment(Pos.CENTER);
+        Button btnExit1 = new Button("Exit");
+        btnExit1.setTextFill(Color.WHITE);
+        HBox hBoxButtons1 = new HBox(btnPlayComputer, btnPlayPlayer, btnExit1);
+        hBoxButtons1.setSpacing(20);
+        hBoxButtons1.setAlignment(Pos.CENTER);
 
         // in-game board
         Circle circle00 = new Circle(22, Color.WHITE);
@@ -64,9 +84,11 @@ public class Connect4GUI extends Application {
         Circle circle06 = new Circle(22, Color.WHITE);
         circle06.setStrokeWidth(1);
         circle06.setStroke(Color.BLACK);
+        Background rowsBG = new Background(new BackgroundFill(Color.rgb(0,100,200), null, null));
         HBox row0 = new HBox(circle00, circle01, circle02, circle03, circle04, circle05, circle06);
         row0.setSpacing(5);
         row0.setAlignment(Pos.CENTER);
+        row0.setBackground(rowsBG);
         Circle circle10 = new Circle(22, Color.WHITE);
         circle10.setStrokeWidth(1);
         circle10.setStroke(Color.BLACK);
@@ -91,6 +113,7 @@ public class Connect4GUI extends Application {
         HBox row1 = new HBox(circle10, circle11, circle12, circle13, circle14, circle15, circle16);
         row1.setSpacing(5);
         row1.setAlignment(Pos.CENTER);
+        row1.setBackground(rowsBG);
         Circle circle20 = new Circle(22, Color.WHITE);
         circle20.setStrokeWidth(1);
         circle20.setStroke(Color.BLACK);
@@ -115,6 +138,7 @@ public class Connect4GUI extends Application {
         HBox row2 = new HBox(circle20, circle21, circle22, circle23, circle24, circle25, circle26);
         row2.setSpacing(5);
         row2.setAlignment(Pos.CENTER);
+        row2.setBackground(rowsBG);
         Circle circle30 = new Circle(22, Color.WHITE);
         circle30.setStrokeWidth(1);
         circle30.setStroke(Color.BLACK);
@@ -139,6 +163,7 @@ public class Connect4GUI extends Application {
         HBox row3 = new HBox(circle30, circle31, circle32, circle33, circle34, circle35, circle36);
         row3.setSpacing(5);
         row3.setAlignment(Pos.CENTER);
+        row3.setBackground(rowsBG);
         Circle circle40 = new Circle(22, Color.WHITE);
         circle40.setStrokeWidth(1);
         circle40.setStroke(Color.BLACK);
@@ -163,6 +188,7 @@ public class Connect4GUI extends Application {
         HBox row4 = new HBox(circle40, circle41, circle42, circle43, circle44, circle45, circle46);
         row4.setSpacing(5);
         row4.setAlignment(Pos.CENTER);
+        row4.setBackground(rowsBG);
         Circle circle50 = new Circle(22, Color.WHITE);
         circle50.setStrokeWidth(1);
         circle50.setStroke(Color.BLACK);
@@ -187,6 +213,7 @@ public class Connect4GUI extends Application {
         HBox row5 = new HBox(circle50, circle51, circle52, circle53, circle54, circle55, circle56);
         row5.setSpacing(5);
         row5.setAlignment(Pos.CENTER);
+        row5.setBackground(rowsBG);
         Button btnColumn0 = new Button("Drop");
         btnColumn0.setMinWidth(10);
         btnColumn0.setTextFill(Color.WHITE);
@@ -219,25 +246,110 @@ public class Connect4GUI extends Application {
         board.addRow(4, row4);
         board.addRow(5, row5);
         board.addRow(6, row6);
-        board.setVgap(5);
+        board.setVgap(3);
+        board.setAlignment(Pos.CENTER);
+
+        // title text scene 2
+        Label sceneTitle2 = new Label("CONNECT 4");
+        sceneTitle2.setFont(Font.font("Avant Garde Gothic Bold", FontWeight.BOLD, 50));
+        sceneTitle2.setTextFill(Color.BLACK);
+        VBox titleContainer2 = new VBox(sceneTitle2);
+        titleContainer2.setAlignment(Pos.CENTER);
+
+        // in-game spacers and bottom text
+        Text gameText = new Text("Testing for now.");
+        gameText.setFont(Font.font("Avant Garde Gothic Bold", 16));
+        VBox gameTextContainer = new VBox(gameText);
+        gameTextContainer.setAlignment(Pos.CENTER);
+        gameTextContainer.setPadding(new Insets(10));
+
+        // title text scene 3
+        Label sceneTitle3 = new Label("CONNECT 4");
+        sceneTitle3.setFont(Font.font("Avant Garde Gothic Bold", FontWeight.BOLD, 50));
+        sceneTitle3.setTextFill(Color.BLACK);
+        VBox titleContainer3 = new VBox(sceneTitle3);
+        titleContainer3.setAlignment(Pos.CENTER);
+
+        // post-game messages
+        Text postGameText = new Text("Testing for now!");
+        postGameText.setFont(Font.font("Avant Garde Gothic Bold", FontWeight.BOLD, 35));
+        VBox postGameTextContainer = new VBox(postGameText);
+        postGameTextContainer.setAlignment(Pos.CENTER);
+        Button btnExit2 = new Button("Exit");
+        btnExit2.setAlignment(Pos.CENTER);
+        btnExit2.setTextFill(Color.WHITE);
+        VBox exit2Container = new VBox(btnExit2);
+        exit2Container.setAlignment(Pos.CENTER);
+        exit2Container.setPadding(new Insets(10));
+
+        // scene0 root
+        BorderPane borderPane0 = new BorderPane();
+        borderPane0.setCenter(hBoxButtons0);
+        borderPane0.setTop(titleContainer0);
 
         // scene1 root
         BorderPane borderPane1 = new BorderPane();
-        borderPane1.setCenter(hBoxButtons);
-        borderPane1.setTop(titleContainer);
+        borderPane1.setCenter(hBoxButtons1);
+        borderPane1.setTop(titleContainer1);
 
         // scene2 root
         BorderPane borderPane2 = new BorderPane();
         borderPane2.setCenter(board);
-        borderPane2.setTop(titleContainer);
+        borderPane2.setTop(titleContainer2);
+        borderPane2.setBottom(gameTextContainer);
 
+        // scene3 root
+        BorderPane borderPane3 = new BorderPane();
+        borderPane3.setCenter(postGameTextContainer);
+        borderPane3.setTop(titleContainer3);
+        borderPane3.setBottom(exit2Container);
+
+        // final scenes and staging
+        Scene scene0 = new Scene(borderPane0, 500, 450);
         Scene scene1 = new Scene(borderPane1, 500, 450);
         Scene scene2 = new Scene(borderPane2, 500, 450);
+        Scene scene3 = new Scene(borderPane3, 500, 450);
+        scene0.getStylesheets().add("styles.css");
         scene1.getStylesheets().add("styles.css");
         scene2.getStylesheets().add("styles.css");
-        primaryStage.setScene(scene2);
+        scene3.getStylesheets().add("styles.css");
+        primaryStage.setScene(scene0);
         primaryStage.setTitle("Connect 4");
         primaryStage.show();
+
+        // ACTIONS //
+        // Exit Action
+        btnExit0.setOnAction(event -> {
+            primaryStage.close();
+        });
+
+        btnExit1.setOnAction(event -> {
+            primaryStage.close();
+        });
+
+        btnExit2.setOnAction(event -> {
+            primaryStage.close();
+        });
+
+        // Switch Scenes
+        btnGUI.setOnAction(event -> {
+            primaryStage.setScene(scene1);
+        });
+
+        btnConsole.setOnAction(event -> {
+            primaryStage.close();
+            Connect4TextConsole.main(new String[0]);
+        });
+
+        btnPlayComputer.setOnAction(event -> {
+            primaryStage.setScene(scene2);
+            gameText.setText("Your turn. Choose a column to drop your piece in.");
+        });
+
+        btnPlayPlayer.setOnAction(event -> {
+            primaryStage.setScene(scene2);
+            gameText.setText("Red player - your turn. Choose a column to drop your piece in.");
+        });
     }
 
     /**
