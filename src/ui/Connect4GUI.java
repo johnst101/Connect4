@@ -1,12 +1,15 @@
 package ui;
 
 /**
- * TODO:
+ * Runs the graphical user interface and starts the game
+ * for Connect 4. This class helps to prompt the user through
+ * the Connect 4 game and allows for choosing different game modes.
  *
  * @author Tyler Johnson (tjohson)
  * @version @version 1.0 Apr 7, 2024
  */
 
+// packages
 import core.Connect4Logic;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -24,21 +27,20 @@ import javafx.stage.Stage;
 
 public class Connect4GUI extends Application {
 
-    /**TODO:*/
+    /**Graphical game board where the pieces are placed to visually represent each move.*/
     private GridPane board = new GridPane();
-    /**TODO:*/
+    /**Logic to drive each move of the Connect 4 game.*/
     private Connect4Logic newGameLogic;
-    /**TODO:*/
+    /**Indicator for if the game chosen is against the computer or another player.*/
     private boolean compGameInd;
 
     /**
-     * TODO:
+     * Acts as the main method and sets the Stage for the GUI Scenes to
+     * sit on top of. Within the method there is event handling so that
+     * when buttons are pressed the game progresses and can complete.
      *
      * @param primaryStage the primary stage for this application, onto which
-     * the application scene can be set. The primary stage will be embedded in
-     * the browser if the application was launched as an applet.
-     * Applications may create other stages, if needed, but they will not be
-     * primary stages and will not be embedded in the browser.
+     * the application scene can be set.
      */
     @Override
     public void start(Stage primaryStage) {
@@ -78,158 +80,7 @@ public class Connect4GUI extends Application {
         hBoxButtons1.setSpacing(20);
         hBoxButtons1.setAlignment(Pos.CENTER);
 
-        // in-game board
-//        Circle circle00 = new Circle(22, Color.WHITE);
-//        circle00.setStrokeWidth(1);
-//        circle00.setStroke(Color.BLACK);
-//        Circle circle01 = new Circle(22, Color.WHITE);
-//        circle01.setStrokeWidth(1);
-//        circle01.setStroke(Color.BLACK);
-//        Circle circle02 = new Circle(22, Color.WHITE);
-//        circle02.setStrokeWidth(1);
-//        circle02.setStroke(Color.BLACK);
-//        Circle circle03 = new Circle(22, Color.WHITE);
-//        circle03.setStrokeWidth(1);
-//        circle03.setStroke(Color.BLACK);
-//        Circle circle04 = new Circle(22, Color.WHITE);
-//        circle04.setStrokeWidth(1);
-//        circle04.setStroke(Color.BLACK);
-//        Circle circle05 = new Circle(22, Color.WHITE);
-//        circle05.setStrokeWidth(1);
-//        circle05.setStroke(Color.BLACK);
-//        Circle circle06 = new Circle(22, Color.WHITE);
-//        circle06.setStrokeWidth(1);
-//        circle06.setStroke(Color.BLACK);
-//        Background rowsBG = new Background(new BackgroundFill(Color.rgb(0,100,200), null, null));
-//        HBox row0 = new HBox(circle00, circle01, circle02, circle03, circle04, circle05, circle06);
-//        row0.setSpacing(5);
-//        row0.setAlignment(Pos.CENTER);
-//        row0.setBackground(rowsBG);
-//        Circle circle10 = new Circle(22, Color.WHITE);
-//        circle10.setStrokeWidth(1);
-//        circle10.setStroke(Color.BLACK);
-//        Circle circle11 = new Circle(22, Color.WHITE);
-//        circle11.setStrokeWidth(1);
-//        circle11.setStroke(Color.BLACK);
-//        Circle circle12 = new Circle(22, Color.WHITE);
-//        circle12.setStrokeWidth(1);
-//        circle12.setStroke(Color.BLACK);
-//        Circle circle13 = new Circle(22, Color.WHITE);
-//        circle13.setStrokeWidth(1);
-//        circle13.setStroke(Color.BLACK);
-//        Circle circle14 = new Circle(22, Color.WHITE);
-//        circle14.setStrokeWidth(1);
-//        circle14.setStroke(Color.BLACK);
-//        Circle circle15 = new Circle(22, Color.WHITE);
-//        circle15.setStrokeWidth(1);
-//        circle15.setStroke(Color.BLACK);
-//        Circle circle16 = new Circle(22, Color.WHITE);
-//        circle16.setStrokeWidth(1);
-//        circle16.setStroke(Color.BLACK);
-//        HBox row1 = new HBox(circle10, circle11, circle12, circle13, circle14, circle15, circle16);
-//        row1.setSpacing(5);
-//        row1.setAlignment(Pos.CENTER);
-//        row1.setBackground(rowsBG);
-//        Circle circle20 = new Circle(22, Color.WHITE);
-//        circle20.setStrokeWidth(1);
-//        circle20.setStroke(Color.BLACK);
-//        Circle circle21 = new Circle(22, Color.WHITE);
-//        circle21.setStrokeWidth(1);
-//        circle21.setStroke(Color.BLACK);
-//        Circle circle22 = new Circle(22, Color.WHITE);
-//        circle22.setStrokeWidth(1);
-//        circle22.setStroke(Color.BLACK);
-//        Circle circle23 = new Circle(22, Color.WHITE);
-//        circle23.setStrokeWidth(1);
-//        circle23.setStroke(Color.BLACK);
-//        Circle circle24 = new Circle(22, Color.WHITE);
-//        circle24.setStrokeWidth(1);
-//        circle24.setStroke(Color.BLACK);
-//        Circle circle25 = new Circle(22, Color.WHITE);
-//        circle25.setStrokeWidth(1);
-//        circle25.setStroke(Color.BLACK);
-//        Circle circle26 = new Circle(22, Color.WHITE);
-//        circle26.setStrokeWidth(1);
-//        circle26.setStroke(Color.BLACK);
-//        HBox row2 = new HBox(circle20, circle21, circle22, circle23, circle24, circle25, circle26);
-//        row2.setSpacing(5);
-//        row2.setAlignment(Pos.CENTER);
-//        row2.setBackground(rowsBG);
-//        Circle circle30 = new Circle(22, Color.WHITE);
-//        circle30.setStrokeWidth(1);
-//        circle30.setStroke(Color.BLACK);
-//        Circle circle31 = new Circle(22, Color.WHITE);
-//        circle31.setStrokeWidth(1);
-//        circle31.setStroke(Color.BLACK);
-//        Circle circle32 = new Circle(22, Color.WHITE);
-//        circle32.setStrokeWidth(1);
-//        circle32.setStroke(Color.BLACK);
-//        Circle circle33 = new Circle(22, Color.WHITE);
-//        circle33.setStrokeWidth(1);
-//        circle33.setStroke(Color.BLACK);
-//        Circle circle34 = new Circle(22, Color.WHITE);
-//        circle34.setStrokeWidth(1);
-//        circle34.setStroke(Color.BLACK);
-//        Circle circle35 = new Circle(22, Color.WHITE);
-//        circle35.setStrokeWidth(1);
-//        circle35.setStroke(Color.BLACK);
-//        Circle circle36 = new Circle(22, Color.WHITE);
-//        circle36.setStrokeWidth(1);
-//        circle36.setStroke(Color.BLACK);
-//        HBox row3 = new HBox(circle30, circle31, circle32, circle33, circle34, circle35, circle36);
-//        row3.setSpacing(5);
-//        row3.setAlignment(Pos.CENTER);
-//        row3.setBackground(rowsBG);
-//        Circle circle40 = new Circle(22, Color.WHITE);
-//        circle40.setStrokeWidth(1);
-//        circle40.setStroke(Color.BLACK);
-//        Circle circle41 = new Circle(22, Color.WHITE);
-//        circle41.setStrokeWidth(1);
-//        circle41.setStroke(Color.BLACK);
-//        Circle circle42 = new Circle(22, Color.WHITE);
-//        circle42.setStrokeWidth(1);
-//        circle42.setStroke(Color.BLACK);
-//        Circle circle43 = new Circle(22, Color.WHITE);
-//        circle43.setStrokeWidth(1);
-//        circle43.setStroke(Color.BLACK);
-//        Circle circle44 = new Circle(22, Color.WHITE);
-//        circle44.setStrokeWidth(1);
-//        circle44.setStroke(Color.BLACK);
-//        Circle circle45 = new Circle(22, Color.WHITE);
-//        circle45.setStrokeWidth(1);
-//        circle45.setStroke(Color.BLACK);
-//        Circle circle46 = new Circle(22, Color.WHITE);
-//        circle46.setStrokeWidth(1);
-//        circle46.setStroke(Color.BLACK);
-//        HBox row4 = new HBox(circle40, circle41, circle42, circle43, circle44, circle45, circle46);
-//        row4.setSpacing(5);
-//        row4.setAlignment(Pos.CENTER);
-//        row4.setBackground(rowsBG);
-//        Circle circle50 = new Circle(22, Color.WHITE);
-//        circle50.setStrokeWidth(1);
-//        circle50.setStroke(Color.BLACK);
-//        Circle circle51 = new Circle(22, Color.WHITE);
-//        circle51.setStrokeWidth(1);
-//        circle51.setStroke(Color.BLACK);
-//        Circle circle52 = new Circle(22, Color.WHITE);
-//        circle52.setStrokeWidth(1);
-//        circle52.setStroke(Color.BLACK);
-//        Circle circle53 = new Circle(22, Color.WHITE);
-//        circle53.setStrokeWidth(1);
-//        circle53.setStroke(Color.BLACK);
-//        Circle circle54 = new Circle(22, Color.WHITE);
-//        circle54.setStrokeWidth(1);
-//        circle54.setStroke(Color.BLACK);
-//        Circle circle55 = new Circle(22, Color.WHITE);
-//        circle55.setStrokeWidth(1);
-//        circle55.setStroke(Color.BLACK);
-//        Circle circle56 = new Circle(22, Color.WHITE);
-//        circle56.setStrokeWidth(1);
-//        circle56.setStroke(Color.BLACK);
-//        HBox row5 = new HBox(circle50, circle51, circle52, circle53, circle54, circle55, circle56);
-//        row5.setSpacing(5);
-//        row5.setAlignment(Pos.CENTER);
-//        row5.setBackground(rowsBG);
+        // Buttons for the game board
         Button btnColumn0 = new Button("Drop");
         btnColumn0.setMinWidth(10);
         btnColumn0.setTextFill(Color.WHITE);
@@ -628,17 +479,22 @@ public class Connect4GUI extends Application {
     }
 
     /**
-     * TODO:
+     * Based on the button that is selected by the player, the next available
+     * space in that column will be filled in with the player's colored piece.
+     * The game board is redrawn with each move to see the result of the move
+     * in the GUI. This method returns a boolean value for if the move was
+     * properly completed or not.
      *
-     * @param columnSelection
-     * @param gameText
-     * @param btnColumn0
-     * @param btnColumn1
-     * @param btnColumn2
-     * @param btnColumn3
-     * @param btnColumn4
-     * @param btnColumn5
-     * @param btnColumn6
+     * @param columnSelection The associated column number for the button selected by the user.
+     * @param gameText The text object for the game text at the bottom of the scene.
+     * @param btnColumn0 The drop button for column 1 to be passed through to draw the game board.
+     * @param btnColumn1 The drop button for column 2 to be passed through to draw the game board.
+     * @param btnColumn2 The drop button for column 3 to be passed through to draw the game board.
+     * @param btnColumn3 The drop button for column 4 to be passed through to draw the game board.
+     * @param btnColumn4 The drop button for column 5 to be passed through to draw the game board.
+     * @param btnColumn5 The drop button for column 6 to be passed through to draw the game board.
+     * @param btnColumn6 The drop button for column 7 to be passed through to draw the game board.
+     * @return The boolean representation of if a move was completed or not.
      */
     private boolean makeMove(int columnSelection, Text gameText, Button btnColumn0, Button btnColumn1, Button btnColumn2, Button btnColumn3, Button btnColumn4, Button btnColumn5, Button btnColumn6) {
         if (compGameInd) {
@@ -663,6 +519,21 @@ public class Connect4GUI extends Application {
         }
     }
 
+    /**
+     * This method makes a move for the computer player. It finds the next
+     * available space from the bottom to top, left to right and fills it
+     * with a yellow game piece. The game board is redrawn with each move
+     * to see the result of the move in the GUI.
+     *
+     * @param gameText The text object for the game text at the bottom of the scene.
+     * @param btnColumn0 The drop button for column 1 to be passed through to draw the game board.
+     * @param btnColumn1 The drop button for column 2 to be passed through to draw the game board.
+     * @param btnColumn2 The drop button for column 3 to be passed through to draw the game board.
+     * @param btnColumn3 The drop button for column 4 to be passed through to draw the game board.
+     * @param btnColumn4 The drop button for column 5 to be passed through to draw the game board.
+     * @param btnColumn5 The drop button for column 6 to be passed through to draw the game board.
+     * @param btnColumn6 The drop button for column 7 to be passed through to draw the game board.
+     */
     private void computerMove(Text gameText, Button btnColumn0, Button btnColumn1, Button btnColumn2, Button btnColumn3, Button btnColumn4, Button btnColumn5, Button btnColumn6) {
         gameText.setText("Computer's turn. Making move now.");
         newGameLogic.getGameBoard().getCompPlayer().setCompBoardState();
@@ -676,15 +547,16 @@ public class Connect4GUI extends Application {
     }
 
     /**
-     * TODO:
+     * Draws a blank game board on the scene to visually represent the beginning state of
+     * a new game.
      *
-     * @param column0
-     * @param column1
-     * @param column2
-     * @param column3
-     * @param column4
-     * @param column5
-     * @param column6
+     * @param column0 The drop button for column 1 to be passed through to draw the game board.
+     * @param column1 The drop button for column 2 to be passed through to draw the game board.
+     * @param column2 The drop button for column 3 to be passed through to draw the game board.
+     * @param column3 The drop button for column 4 to be passed through to draw the game board.
+     * @param column4 The drop button for column 5 to be passed through to draw the game board.
+     * @param column5 The drop button for column 6 to be passed through to draw the game board.
+     * @param column6 The drop button for column 7 to be passed through to draw the game board.
      */
     private void drawBlankGrid(Button column0, Button column1, Button column2, Button column3, Button column4, Button column5, Button column6) {
         board.getChildren().clear();
@@ -711,16 +583,18 @@ public class Connect4GUI extends Application {
     }
 
     /**
-     * TODO:
+     * Draws an updated game board on the scene to visually represent the current state of
+     * a game. It takes the board state char array and all the buttons to add onto the
+     * bottom row.
      *
-     * @param boardState
-     * @param column0
-     * @param column1
-     * @param column2
-     * @param column3
-     * @param column4
-     * @param column5
-     * @param column6
+     * @param boardState The char[][] array state of the game board to see if a space is filled or not.
+     * @param column0 The drop button for column 1 to be passed through to draw the game board.
+     * @param column1 The drop button for column 2 to be passed through to draw the game board.
+     * @param column2 The drop button for column 3 to be passed through to draw the game board.
+     * @param column3 The drop button for column 4 to be passed through to draw the game board.
+     * @param column4 The drop button for column 5 to be passed through to draw the game board.
+     * @param column5 The drop button for column 6 to be passed through to draw the game board.
+     * @param column6 The drop button for column 7 to be passed through to draw the game board.
      */
     private void drawGrid(char[][] boardState, Button column0, Button column1, Button column2, Button column3, Button column4, Button column5, Button column6) {
         board.getChildren().clear();
@@ -754,7 +628,9 @@ public class Connect4GUI extends Application {
     }
 
     /**
-     * TODO:
+     * Entry point into the program.
+     *
+     * @param args: used to launch GUI
      */
     public static void main(String[] args) {
         launch(args);

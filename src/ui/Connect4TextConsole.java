@@ -1,11 +1,12 @@
 package ui;
 
 /**
- * Connect4TextConsole contains the main method of the Connect4 game.
- * It drives the game on the console and interacts with the players.
+ * Connect4TextConsole contains the main method of the Connect4 game
+ * for when people want to play the game on the console. This is
+ * called from the Connect4GUI class.
  *
  * @author Tyler Johnson (tjohson)
- * @version 2.0 Mar 28, 2024
+ * @version 3.0 Apr 7, 2024
  */
 
 // packages
