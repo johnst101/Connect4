@@ -1,7 +1,6 @@
 package test;
 
 import core.Connect4Logic;
-import core.GameBoard;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;

@@ -80,7 +80,7 @@ public class GameBoard {
      * @param isPlayerXTurn The indicator for if it's Player X's turn or not.
      * @return The boolean representation of if the move made was valid.
      */
-    public boolean setBoardState(int columnSelection, boolean isPlayerXTurn) {
+    public boolean setBoardState(int columnSelection, boolean isPlayerXTurn) throws ArrayIndexOutOfBoundsException {
         if (this.boardState[0][columnSelection - 1] != ' ') {
             return false;
         }
@@ -174,6 +174,15 @@ public class GameBoard {
      */
     public void subtractOnePiece() {
         this.pieceCount--;
+    }
+
+    /**
+     * Returns the number of pieces left to be played in the game.
+     *
+     * @return The integer representation of the number of pieces left in the game.
+     */
+    public int getPieceCount() {
+        return this.pieceCount;
     }
 
     /**
