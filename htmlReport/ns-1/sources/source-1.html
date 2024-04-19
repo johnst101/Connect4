@@ -1,0 +1,150 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Connect4ComputerPlayer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">core</a>
+</div>
+
+<h1>Coverage Summary for Class: Connect4ComputerPlayer (core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Connect4ComputerPlayer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package core;
+&nbsp;
+&nbsp;/**
+&nbsp; * Plays the computer&#39;s move if when the program starts
+&nbsp; * play against the computer is selected.
+&nbsp; *
+&nbsp; * @author Tyler Johnson (tjohson)
+&nbsp; * @version 1.0 Mar 28, 2024
+&nbsp; */
+&nbsp;
+&nbsp;public class Connect4ComputerPlayer {
+&nbsp;    /**Holds the data structure state of the Game Board.*/
+&nbsp;    private char[][] boardState;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sole constructor. Assigns this object&#39;s board state to be the
+&nbsp;     * board state passed from he GameBoard object to ensure the same
+&nbsp;     * game board is being used for the computer move.
+&nbsp;     *
+&nbsp;     * @param curBoard The state of the game board represented by a 2D array of chars
+&nbsp;     */
+<b class="fc">&nbsp;    public Connect4ComputerPlayer(char[][] curBoard) {</b>
+<b class="fc">&nbsp;        this.boardState = curBoard;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Looks for the first open spot on the board and fills it with &#39;O&#39;.
+&nbsp;     * The computer starts in the bottom left corner and works left to right
+&nbsp;     * and bottom to top to find an opening.
+&nbsp;     */
+&nbsp;    public void setCompBoardState() {
+<b class="fc">&nbsp;        boolean breakOutter = false;</b>
+<b class="fc">&nbsp;        for (int i = this.boardState.length - 1; i &gt;= 0; i--) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; this.boardState[i].length; j++) {</b>
+<b class="fc">&nbsp;                if (this.boardState[i][j] == &#39; &#39;) {</b>
+<b class="fc">&nbsp;                    this.boardState[i][j] = &#39;O&#39;;</b>
+<b class="fc">&nbsp;                    breakOutter = true;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;            if (breakOutter) {</b>
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-19 15:30</div>
+</div>
+</body>
+</html>

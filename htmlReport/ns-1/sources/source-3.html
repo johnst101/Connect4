@@ -1,0 +1,373 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > GameBoard</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">core</a>
+</div>
+
+<h1>Coverage Summary for Class: GameBoard (core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameBoard</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98.5%
+  </span>
+  <span class="absValue">
+    (67/68)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package core;
+&nbsp;
+&nbsp;/**
+&nbsp; * Controls the moves on the Game Board and holds
+&nbsp; * the actual state of the board.
+&nbsp; *
+&nbsp; * @author Tyler Johnson (tjohson)
+&nbsp; * @version 3.0 Apr 7, 2024
+&nbsp; */
+&nbsp;
+&nbsp;public class GameBoard {
+&nbsp;    /**Holds the data structure state of the Game Board.*/
+&nbsp;    private char[][] boardState;
+&nbsp;    /**The trigger for a winning move.*/
+&nbsp;    private boolean winState;
+&nbsp;    /**The trigger for a draw move*/
+&nbsp;    private boolean drawState;
+&nbsp;    /**The number of pieces left to be used*/
+&nbsp;    private int pieceCount;
+&nbsp;    /**For each player vs. computer game a Computer Player will be create*/
+&nbsp;    private Connect4ComputerPlayer compPlayer;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Player vs. player constructor. Invokes a new Game Board. Creates a 2D array
+&nbsp;     * of characters as the board, sets the win state and the draw state
+&nbsp;     * to false, and starts the game with 42 total pieces as there are
+&nbsp;     * 42 spaces to be filled.
+&nbsp;     */
+<b class="fc">&nbsp;    public GameBoard() {</b>
+<b class="fc">&nbsp;        this.boardState = new char[6][7];</b>
+<b class="fc">&nbsp;        this.winState = false;</b>
+<b class="fc">&nbsp;        this.drawState = false;</b>
+<b class="fc">&nbsp;        this.pieceCount = 42;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; this.boardState.length; i++) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; this.boardState[i].length; j++) {</b>
+<b class="fc">&nbsp;                this.boardState[i][j] = &#39; &#39;;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Player vs. computer constructor. Invokes a new Game Board. Creates a 2D array
+&nbsp;     * of characters as the board, sets the win state and the draw state
+&nbsp;     * to false, starts the game with 42 total pieces, and invokes a new
+&nbsp;     * Computer Player object passing the board state to the object.
+&nbsp;     *
+&nbsp;     * @param compGame Indicator to determine if the game type is a player vs. computer game
+&nbsp;     */
+<b class="fc">&nbsp;    public GameBoard(String compGame) {</b>
+<b class="fc">&nbsp;        this.boardState = new char[6][7];</b>
+<b class="fc">&nbsp;        this.winState = false;</b>
+<b class="fc">&nbsp;        this.drawState = false;</b>
+<b class="fc">&nbsp;        this.pieceCount = 42;</b>
+<b class="fc">&nbsp;        this.compPlayer = new Connect4ComputerPlayer(this.boardState);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; this.boardState.length; i++) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; this.boardState[i].length; j++) {</b>
+<b class="fc">&nbsp;                this.boardState[i][j] = &#39; &#39;;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the 2D array of characters that is the game board.
+&nbsp;     * Currently not in use.
+&nbsp;     *
+&nbsp;     * @return The character 2D array representation of the Game Board.
+&nbsp;     */
+&nbsp;    public char[][] getBoardState() {
+<b class="fc">&nbsp;        return this.boardState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds new pieces to the board based on the selection of the Player.
+&nbsp;     * Checks if the column selection is already full and will return false
+&nbsp;     * to tell the Connect4TextConsole to output an error message and request
+&nbsp;     * a new input. If the input is valid, the piece is added and a
+&nbsp;     * check is made if the move created a valid win state or draw state.
+&nbsp;     *
+&nbsp;     * @param columnSelection The inputted selection by the Player.
+&nbsp;     * @param isPlayerXTurn The indicator for if it&#39;s Player X&#39;s turn or not.
+&nbsp;     * @return The boolean representation of if the move made was valid.
+&nbsp;     */
+&nbsp;    public boolean setBoardState(int columnSelection, boolean isPlayerXTurn) throws ArrayIndexOutOfBoundsException {
+<b class="fc">&nbsp;        if (this.boardState[0][columnSelection - 1] != &#39; &#39;) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        if (isPlayerXTurn) {</b>
+<b class="fc">&nbsp;            for (int i = this.boardState.length - 1; i &gt;= 0; i--) {</b>
+<b class="fc">&nbsp;                if (this.boardState[i][columnSelection - 1] == &#39; &#39;) {</b>
+<b class="fc">&nbsp;                    this.boardState[i][columnSelection - 1] = &#39;X&#39;;</b>
+<b class="fc">&nbsp;                    setWinState(&#39;X&#39;);</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            for (int i = this.boardState.length - 1; i &gt;= 0; i--) {</b>
+<b class="fc">&nbsp;                if (this.boardState[i][columnSelection - 1] == &#39; &#39;) {</b>
+<b class="fc">&nbsp;                    this.boardState[i][columnSelection - 1] = &#39;O&#39;;</b>
+<b class="fc">&nbsp;                    setWinState(&#39;O&#39;);</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**Prints the visual representation of the Game Board into the console.*/
+&nbsp;    public void printCurrentBoard() {
+<b class="fc">&nbsp;        for (int i = 0; i &lt; this.boardState.length; i++) {</b>
+<b class="fc">&nbsp;            System.out.print(&quot;|&quot;);</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; this.boardState[i].length; j++) {</b>
+<b class="fc">&nbsp;                System.out.print(&quot; &quot; + this.boardState[i][j] + &quot; &quot;);</b>
+<b class="fc">&nbsp;                System.out.print(&quot;|&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            System.out.println();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        System.out.println();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the computer player object.
+&nbsp;     *
+&nbsp;     * @return The computer player object for a player vs. computer game.
+&nbsp;     */
+&nbsp;    public Connect4ComputerPlayer getCompPlayer() {
+<b class="fc">&nbsp;        return this.compPlayer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the boolean representation of in the Game Board
+&nbsp;     * is in a valid win state.
+&nbsp;     *
+&nbsp;     * @return The boolean representation of a valid win state.
+&nbsp;     */
+&nbsp;    public boolean getWinState() {
+<b class="fc">&nbsp;        return this.winState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The method checks for a win state horizontally, vertically,
+&nbsp;     * and diagonally. If one of the four checks is true, then the
+&nbsp;     * win state will change to true.
+&nbsp;     *
+&nbsp;     * @param playerTurn The character &#39;X&#39; or &#39;O&#39; to represent who&#39;s turn it is.
+&nbsp;     */
+&nbsp;    public void setWinState(char playerTurn) {
+<b class="fc">&nbsp;        if (checkHorizontal(playerTurn) || checkVertical(playerTurn) || checkDiagonalBotTop(playerTurn) || checkDiagonalTopBot(playerTurn)) {</b>
+<b class="fc">&nbsp;            this.winState = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the boolean representation of if a valid
+&nbsp;     * draw state has been met.
+&nbsp;     *
+&nbsp;     * @return The boolean representation of a valid draw state.
+&nbsp;     */
+&nbsp;    public boolean getDrawState() {
+<b class="fc">&nbsp;        return this.drawState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Changes the draw state to true if there are no
+&nbsp;     * pieces left to be placed.
+&nbsp;     */
+&nbsp;    public void setDrawState() {
+<b class="fc">&nbsp;        if (this.pieceCount == 0) {</b>
+<b class="fc">&nbsp;            this.drawState = true;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decrements the piece count down by 1 when called.
+&nbsp;     */
+&nbsp;    public void subtractOnePiece() {
+<b class="fc">&nbsp;        this.pieceCount--;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the number of pieces left to be played in the game.
+&nbsp;     *
+&nbsp;     * @return The integer representation of the number of pieces left in the game.
+&nbsp;     */
+&nbsp;    public int getPieceCount() {
+<b class="fc">&nbsp;        return this.pieceCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks over the Game Board horizontally to determine if
+&nbsp;     * the given player has four pieces in a row. Returns true
+&nbsp;     * if four pieces in a row are found. Otherwise, returns false.
+&nbsp;     *
+&nbsp;     * @param playerTurn The char representation of the player whose turn it is.
+&nbsp;     * @return The boolean representation of if a win state was found.
+&nbsp;     */
+&nbsp;    public boolean checkHorizontal(char playerTurn) {
+<b class="fc">&nbsp;        for (int row = 0; row &lt; this.boardState.length; row++) {</b>
+<b class="fc">&nbsp;            for (int col = 0; col &lt; this.boardState[row].length - 3; col++) {</b>
+<b class="fc">&nbsp;                if (this.boardState[row][col] == playerTurn &amp;&amp; this.boardState[row][col + 1] == playerTurn &amp;&amp; this.boardState[row][col + 2] == playerTurn &amp;&amp; this.boardState[row][col + 3] == playerTurn) {</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks over the Game Board vertically to determine if
+&nbsp;     * the given player has four concurrent pieces in a column. Returns true
+&nbsp;     * if four concurrent pieces are found. Otherwise, returns false.
+&nbsp;     *
+&nbsp;     * @param playerTurn The char representation of the player whose turn it is.
+&nbsp;     * @return The boolean representation of if a win state was found.
+&nbsp;     */
+&nbsp;    public boolean checkVertical(char playerTurn) {
+<b class="fc">&nbsp;        for (int col = 0; col &lt; this.boardState[0].length; col++) {</b>
+<b class="fc">&nbsp;            for (int row = 0; row &lt; this.boardState.length - 3; row++) {</b>
+<b class="fc">&nbsp;                if (this.boardState[row][col] == playerTurn &amp;&amp; this.boardState[row + 1][col] == playerTurn &amp;&amp; this.boardState[row + 2][col] == playerTurn &amp;&amp; this.boardState[row + 3][col] == playerTurn) {</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks over the Game Board diagonally from bottom to top to determine if
+&nbsp;     * the given player has four concurrent pieces. Returns true
+&nbsp;     * if four concurrent pieces are found. Otherwise, returns false.
+&nbsp;     *
+&nbsp;     * @param playerTurn The char representation of the player whose turn it is.
+&nbsp;     * @return The boolean representation of if a win state was found.
+&nbsp;     */
+&nbsp;    public boolean checkDiagonalBotTop(char playerTurn) {
+<b class="fc">&nbsp;        for (int row = 3; row &lt; this.boardState.length; row++) {</b>
+<b class="fc">&nbsp;            for (int col = 0; col &lt;= this.boardState[col].length - 4; col++) {</b>
+<b class="fc">&nbsp;                if (this.boardState[row][col] == playerTurn &amp;&amp;</b>
+&nbsp;                        this.boardState[row-1][col+1] == playerTurn &amp;&amp;
+&nbsp;                        this.boardState[row-2][col+2] == playerTurn &amp;&amp;
+&nbsp;                        this.boardState[row-3][col+3] == playerTurn) {
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Checks over the Game Board diagonally from top to bottom to determine if
+&nbsp;     * the given player has four concurrent pieces. Returns true
+&nbsp;     * if four concurrent pieces are found. Otherwise, returns false.
+&nbsp;     *
+&nbsp;     * @param playerTurn The char representation of the player whose turn it is.
+&nbsp;     * @return The boolean representation of if a win state was found.
+&nbsp;     */
+&nbsp;    public boolean checkDiagonalTopBot(char playerTurn) {
+<b class="fc">&nbsp;        for (int row = 0; row &lt;= this.boardState.length - 4; row++) {</b>
+<b class="fc">&nbsp;            for (int col = 0; col &lt;= this.boardState[col].length - 4; col++) {</b>
+<b class="fc">&nbsp;                if (this.boardState[row][col] == playerTurn &amp;&amp;</b>
+&nbsp;                        this.boardState[row+1][col+1] == playerTurn &amp;&amp;
+&nbsp;                        this.boardState[row+2][col+2] == playerTurn &amp;&amp;
+&nbsp;                        this.boardState[row+3][col+3] == playerTurn) {
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-19 15:30</div>
+</div>
+</body>
+</html>

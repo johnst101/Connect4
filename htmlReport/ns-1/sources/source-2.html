@@ -1,0 +1,190 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Connect4Logic</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">core</a>
+</div>
+
+<h1>Coverage Summary for Class: Connect4Logic (core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Connect4Logic</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package core;
+&nbsp;
+&nbsp;/**
+&nbsp; * Connect4Logic runs the moves of each player and the game board state.
+&nbsp; *
+&nbsp; * @author Tyler Johnson (tjohson)
+&nbsp; * @version 2.0 Mar 28, 2024
+&nbsp; */
+&nbsp;
+&nbsp;// packages
+&nbsp;import java.util.Random;
+&nbsp;
+&nbsp;public class Connect4Logic {
+&nbsp;    /**Is a random unique ID to each game*/
+&nbsp;    private final int gameID;
+&nbsp;    /**Tracks if it&#39;s Player X&#39;s turn or not*/
+&nbsp;    private boolean playerXTurn;
+&nbsp;    /**For each game a new Game Board is created and used*/
+&nbsp;    private GameBoard gameBoard;
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Player vs. player constructor. Creates random ID for the game between 100 and 1000,
+&nbsp;     * creates a new Game Board object, and sets playerXTurn to true.
+&nbsp;     */
+<b class="fc">&nbsp;    public Connect4Logic() {</b>
+<b class="fc">&nbsp;        Random rand = new Random();</b>
+<b class="fc">&nbsp;        int min = 100, max = 1000;</b>
+<b class="fc">&nbsp;        this.gameID = rand.nextInt(max - min + 1) + min;</b>
+<b class="fc">&nbsp;        this.gameBoard = new GameBoard();</b>
+<b class="fc">&nbsp;        this.playerXTurn = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Player vs. computer constructor. Creates random ID for the game between 100 and 1000,
+&nbsp;     * creates a new Game Board object with the computer game indicator as the parameter,
+&nbsp;     * and sets playerXTurn to true.
+&nbsp;     *
+&nbsp;     * @param compGame Indicator to determine if the game type is a player vs. computer game
+&nbsp;     */
+<b class="fc">&nbsp;    public Connect4Logic(String compGame) {</b>
+<b class="fc">&nbsp;        Random rand = new Random();</b>
+<b class="fc">&nbsp;        int min = 100, max = 1000;</b>
+<b class="fc">&nbsp;        this.gameID = rand.nextInt(max - min + 1) + min;</b>
+<b class="fc">&nbsp;        this.gameBoard = new GameBoard(compGame);</b>
+<b class="fc">&nbsp;        this.playerXTurn = true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the game ID.
+&nbsp;     *
+&nbsp;     * @return The integer ID for the current game.
+&nbsp;     */
+&nbsp;    public int getGameID() {
+<b class="fc">&nbsp;        return this.gameID;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the current game board.
+&nbsp;     *
+&nbsp;     * @return The GameBoard object for the current game.
+&nbsp;     */
+&nbsp;    public GameBoard getGameBoard() {
+<b class="fc">&nbsp;        return this.gameBoard;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns whether it is currently Player X&#39;s turn.
+&nbsp;     *
+&nbsp;     * @return The boolean representation of if it&#39;s Player X&#39;s turn.
+&nbsp;     */
+&nbsp;    public boolean getPlayerXTurn() {
+<b class="fc">&nbsp;        return this.playerXTurn;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Takes a boolean argument set by the GameBoard that
+&nbsp;     * flips the boolean value for if it&#39;s Player X&#39;s turn
+&nbsp;     * to switch who is next to make a move.
+&nbsp;     *
+&nbsp;     * @param turnSwitch The opposite boolean of which player just made a move.
+&nbsp;     */
+&nbsp;    public void setPlayerXTurn(boolean turnSwitch) {
+<b class="fc">&nbsp;        this.playerXTurn = turnSwitch;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-04-19 15:30</div>
+</div>
+</body>
+</html>
